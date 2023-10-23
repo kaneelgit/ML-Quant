@@ -1,6 +1,13 @@
 # ML-Quant
 Notebooks and Code for ML based quant strategies and research.
 
+## EMA Optimization
+This notebook has a method to find the best EMA lines that represent 'uptrends' and 'downtrends' in S&P 500.
+
+![ema optimize](https://github.com/kaneelgit/ML-Quant/assets/85404022/5eda7ba5-bec7-4602-b0c8-bf9742ffaa1b)
+
+![ema optimized](https://github.com/kaneelgit/ML-Quant/assets/85404022/e8579eab-7cb6-478d-b9e5-0b52580ed130)
+
 ## Probabilistic Logistic Regression
 This shows how to use probabilistic Logistic Regression to detect outliers in a dataset. Prob LR is useful to guage the confidence of a decision. This is helpful to decide the risk of a bet. 
 
