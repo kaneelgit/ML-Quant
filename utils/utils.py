@@ -97,3 +97,96 @@ def create_targets(data, n = 10, target_winloss = [20, 0]):
                     zip(data['min'], data['max'], data['loc_min'], data['loc_max'])]
     
     return data
+
+def create_volume_bar(data, thresh = 2000):
+    
+    df = data.copy()
+    
+    #create volume bars
+    df_resampled = df.resample('1T', on='date').agg({'open': 'first', 'high': 'max', 'close': 'last', 'low': 'min', 'volume': 'sum'}).fillna(0).reset_index()
+
+    # Create a new dataframe to store the resampled values when volume accumulates 1000 units
+    df_new = pd.DataFrame(columns=['open', 'high', 'close', 'low', 'delta', 'o_index', 'date'])
+
+    #volume threshold
+    vol_thresh = thresh
+
+    #initial values
+    volume_accumulated = 0
+    start_time = None
+
+    # Iterate over each row in the resampled dataframe
+    for index, row in df_resampled.iterrows():
+        volume_accumulated += row['volume']
+
+        if volume_accumulated >= vol_thresh:
+            # Calculate the time difference since the last 1000 volume accumulation
+            delta = (index - start_time) if start_time else 0
+
+            # Append a new row to the new dataframe
+            df_new.loc[index] = [row['open'], row['high'], row['close'], row['low'], delta, index, row['date']]
+
+            # Reset the volume accumulator and start time for the next accumulation
+            volume_accumulated = 0
+            start_time = None
+
+        if volume_accumulated < vol_thresh and start_time is None:
+            # Set the start time when the volume accumulation starts
+            start_time = index
+            
+    return df_new
+
+def generate_trends(data):
+    
+    data['trend'] = 0
+    data['trend_strength'] = np.nan
+    data['trend_period'] = np.nan
+    
+    targets = data['target'].values
+
+    min_indices = np.where(targets == 1)[0]
+
+    max_indices = np.where(targets == 2)[0]
+
+    ind_dict = {}
+
+    for i in min_indices:
+        ind_dict[i] = 1
+
+    for i in max_indices:
+        ind_dict[i] = 2
+
+    sorted_dict = {k: ind_dict[k] for k in sorted(ind_dict)}
+
+    current_ind = next(iter(sorted_dict))
+    current_trend = sorted_dict[current_ind]
+
+
+    for i, trend in sorted_dict.items():
+
+        if current_trend == trend:
+            continue
+        elif (current_trend == 1) and (trend == 2):
+            data.loc[current_ind:i, 'trend'] = 1
+            
+            trend_strength = 1 - ((np.arange(current_ind, i, 1) - current_ind) / (i - current_ind))
+            
+            data.loc[np.arange(current_ind, i, 1), 'trend_strength'] = trend_strength.tolist()
+            
+            data.loc[current_ind:i, 'trend_period'] = (i - current_ind)
+            
+            current_ind = i
+            current_trend = trend
+        elif (current_trend == 2) and (trend == 1):
+            data.loc[current_ind:i, 'trend'] = 2
+            
+            trend_strength = 1 - ((np.arange(current_ind, i, 1) - current_ind) / (i - current_ind))
+            
+            data.loc[np.arange(current_ind, i, 1), 'trend_strength'] = trend_strength.tolist()
+            
+            data.loc[current_ind:i, 'trend_period'] = (i - current_ind)
+            
+            current_ind = i
+            current_trend = trend
+            
+    return data
