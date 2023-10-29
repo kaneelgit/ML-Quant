@@ -8,6 +8,7 @@ Original data distribution, prediction by a mixture distribution implemented usi
 ![gmm_mixture_data](https://github.com/kaneelgit/ML-Quant/assets/85404022/f6b0b76d-8f23-4626-8e0c-71a55a721af8)
 
 TFP mixture model components
+
 ![Mixture model components ](https://github.com/kaneelgit/ML-Quant/assets/85404022/8934afc3-7cf7-4e2f-a75e-d166a1e98401)
 
 Predicted trends by the mixture model
