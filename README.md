@@ -1,6 +1,18 @@
 # ML-Quant
 Notebooks and Code for ML based quant strategies and research.
 
+## Annotations and Sampling
+
+### Volume bar sampling
+Here we sample and plot 'close' value based on the volume. (Close value at every "xx" volume)
+![VolumeBarSamples](https://github.com/kaneelgit/ML-Quant/assets/85404022/79adf80e-8f49-4cfa-aed0-c845aab7d052)
+
+### Trend strength and trend period
+Here we generate trends (% increase or decrease in SPY) and find the trend strength (value between 0 and 1 depending on how long the trend last) and trend period (how long the trend last).
+![TrendStrength](https://github.com/kaneelgit/ML-Quant/assets/85404022/a11d9f7f-ee22-4dfa-86e8-67c8f94ba04f)
+![trend_period](https://github.com/kaneelgit/ML-Quant/assets/85404022/a3b697b5-09d4-43aa-ae6d-32b7325dbf26)
+
+
 ## EMA Optimization
 This notebook has a method to find the best EMA lines that represent 'uptrends' and 'downtrends' in S&P 500.
 
