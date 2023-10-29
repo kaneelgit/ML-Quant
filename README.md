@@ -3,6 +3,16 @@ Notebooks and Code for ML based quant strategies and research.
 
 ## Annotations and Sampling
 
+### Trend prediction using a Gaussian Mixture Model
+Original data distribution, prediction by a mixture distribution implemented using tensorflow probability(TFP) and the prediction by sklearn Gaussian Mixture Model.
+![gmm_mixture_data](https://github.com/kaneelgit/ML-Quant/assets/85404022/f6b0b76d-8f23-4626-8e0c-71a55a721af8)
+
+TFP mixture model components
+![Mixture model components ](https://github.com/kaneelgit/ML-Quant/assets/85404022/8934afc3-7cf7-4e2f-a75e-d166a1e98401)
+
+Predicted trends by the mixture model
+![predicted trend from mixture model](https://github.com/kaneelgit/ML-Quant/assets/85404022/926c70e7-8cc2-40f1-a7f1-5d8c06eb37cf)
+
 ### Volume bar sampling
 Here we sample and plot 'close' value based on the volume. (Close value at every "xx" volume)
 ![VolumeBarSamples](https://github.com/kaneelgit/ML-Quant/assets/85404022/79adf80e-8f49-4cfa-aed0-c845aab7d052)
