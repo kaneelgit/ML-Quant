@@ -1,7 +1,7 @@
 # ML-Quant
 Notebooks and Code for ML based quant strategies and research.
 
-## Level 2 Visualization
+## Level 2 Visualization (Nasdaq Micro Futures)
 ![Screenshot 2025-08-04 001500](https://github.com/user-attachments/assets/248f14f1-2343-455c-a4b0-f1a0c669a6ef)
 
 ## Annotations and Sampling
